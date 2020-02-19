@@ -74,7 +74,7 @@ def pretty_print_horizontal_border_line(n, left, middle, right):
 
 def pretty_print_board(board):
     N = len(board)
-    if sys.stdout.encoding == 'utf-8':
+    if sys.stdout.encoding.lower() == 'utf-8':
         # Print top horizontal border
         pretty_print_horizontal_border_line(N,
                                             down_and_right,
