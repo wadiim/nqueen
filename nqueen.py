@@ -67,7 +67,7 @@ def pretty_print_row_separator(cols):
     print(''.join(['+---' for i in range(cols)]) + '+')
 
 def pretty_print_row(row, sep):
-    print(''.join([sep + ' {} '.format('X' if i else ' ') for i in row]) + sep)
+    print(''.join([sep + ' {} '.format('Q' if i else ' ') for i in row]) + sep)
 
 def pretty_print_horizontal_border_line(n, left, middle, right):
     print(left + (3 * horizontal + middle) * (n - 1) + 3 * horizontal + right)
@@ -98,7 +98,7 @@ def pretty_print_board(board):
     else:
         pretty_print_row_separator(N)
         for row in board:
-            print(''.join(['| {} '.format('X' if i else ' ') for i in row])
+            print(''.join(['| {} '.format('Q' if i else ' ') for i in row])
                 + '|')
             pretty_print_row_separator(N)
 
