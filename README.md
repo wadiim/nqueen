@@ -1,8 +1,10 @@
 # NQueen
 
-NQueen is a command-line program for solving N-Queen Problem.
+An N-Queen Problem solver.
 
-![nq](https://user-images.githubusercontent.com/33803413/74772139-bb09bd00-528f-11ea-9e54-0b8a627a6b0c.png)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/33803413/124955928-c17d0e00-e017-11eb-84e3-596b4cb141fb.png">
+</p>
 
 ## Usage
 
@@ -19,6 +21,7 @@ Option | Meaning |
 --- | ---
 `-h`, `--help` | Show help message and exit.
 `--pretty` | Pretty-print the results.
+`--queen-char CHAR` | Set the character representing the queen. This option only takes effect when the '--pretty' option is given.
 
 ## License
 
