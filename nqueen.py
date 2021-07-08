@@ -66,13 +66,13 @@ def print_board(board):
 def pretty_print_row_separator(cols):
     print(''.join(['+---' for i in range(cols)]) + '+')
 
-def pretty_print_row(row, sep):
-    print(''.join([sep + ' {} '.format('Q' if i else ' ') for i in row]) + sep)
+def pretty_print_row(row, sep, queen_char):
+    print(''.join([sep + ' {} '.format(queen_char if i else ' ') for i in row]) + sep)
 
 def pretty_print_horizontal_border_line(n, left, middle, right):
     print(left + (3 * horizontal + middle) * (n - 1) + 3 * horizontal + right)
 
-def pretty_print_board(board):
+def pretty_print_board(board, queen_char):
     N = len(board)
     if sys.stdout.encoding.lower() == 'utf-8':
         # Print top horizontal border
@@ -82,14 +82,14 @@ def pretty_print_board(board):
                                             down_and_left)
         # Print rows and inner borders under those rows except the last row
         for row in board[:-1]:
-            pretty_print_row(row, vertical)
+            pretty_print_row(row, vertical, queen_char)
             # Print inner horizontal border
             pretty_print_horizontal_border_line(N,
                                                 vertical_and_right,
                                                 vertical_and_horizontal,
                                                 vertical_and_left)
         # Print the last row
-        pretty_print_row(board[-1], vertical)
+        pretty_print_row(board[-1], vertical, queen_char)
         # Print bottom horizontal border
         pretty_print_horizontal_border_line(N,
                                             up_and_right,
@@ -98,15 +98,23 @@ def pretty_print_board(board):
     else:
         pretty_print_row_separator(N)
         for row in board:
-            print(''.join(['| {} '.format('Q' if i else ' ') for i in row])
-                + '|')
+            print(''.join(['| {} '.format(queen_char if i else ' ')
+                for i in row]) + '|')
             pretty_print_row_separator(N)
 
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--pretty", help = 'pretty-print the results',
                         action="store_true")
+    parser.add_argument("--queen-char", metavar = 'CHAR',
+                        default = 'Q', type = CHAR,
+                        help = 'set the character representing the queen')
     return parser.parse_args()
+
+def CHAR(s):
+    if len(s) != 1:
+        raise ValueError('Not a single character')
+    return s
 
 def main():
     args = parse_args()
@@ -117,7 +125,7 @@ def main():
             if not solve_n_queen(board):
                 print('There is no solution for n =', n)
                 continue
-            if args.pretty: pretty_print_board(board)
+            if args.pretty: pretty_print_board(board, args.queen_char)
             else: print_board(board)
     except EOFError:
         pass
